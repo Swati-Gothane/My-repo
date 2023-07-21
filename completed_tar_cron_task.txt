@@ -1,0 +1,42 @@
+*find word /root from anaconda file
+
+ grep -o "/root" anaconda
+ awk '{print $6}' anaconda | head -1  -- if you know in which column the word is 
+
+*create a file /root/hello.txt and find it using find command
+
+sudo find / -name hello.txt
+
+*perform gzip, bzip2 and xz compression on /lib dir. using tar utility
+
+
+Tried this way but showing error
+tar -cvzf etc_arch.zip /lib
+tar: Removing leading `/' from member names
+/lib
+
+cd /lib
+tar -cvzf lib_archive.zip . ----gzib archive
+tar -cvjf lib1_archive.tar.bz2 ---- bzip2
+tar -cvJf lib2-archive.tar.xz -----xz
+
+*compress /lib dir. using tar cammand, further compress it using gzip, bzip2 and xz command.
+# tar -cvf file.tar * --created a archived file 500mb
+#tar -cvzf file_gzip.tar.zip file.tar ---compressed the file using gzip 146mb
+#tar -cvzf file_bzip2.tar.zip file.tar.bz2----compresed using bzip2 --more compression than gzip 125mb
+#tar -cvJf file_xz.tar.xz file.tar.xz   ----compressed the file using xz most compression (almost half the original zie) 70mb
+ 
+*decompress above compressed_files using required utilities
+tar -xvJf file_xz.tar.xz -C /mnt/extracted 
+tar -xvjf file_bzip2.tar.bz2 -C /mnt/extracted1
+tar -xvzf file_gzip.tar.zip -C /mnt/extracted2
+
+
+*schedule a job to create 10 files in /mnt dir. on 29 aug 2019 at 3.30 pm.
+#crontab -e
+# 30 15 29 8 * cd /mnt && touch file{1..10}
+
+*schedule a job to create a file at every saturday of august at 5.30 pm.
+#crontab -e
+30 15 * 8 6 touch file.txt
+
